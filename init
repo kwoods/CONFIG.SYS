@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# install.sh
+# bash <(curl -Ls https://gist.githubusercontent.com/kwoods/babca7e234c95f5b6e3f28be2cb9d271/raw)
+
+# Die on failures
+set -e
+
+# Echo all commands
+set -x
+
+# Check for Homebrew, install if we don’t have it
+if test ! $(which brew); then
+    echo “Installing homebrew…”
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+brew -v
+sudo chown -R $USER /usr/local/Cellar
+brew update
+
+curl -Ls https://gist.githubusercontent.com/kwoods/d1f5976cff5517c7e14cfe8a40bbb253/raw --output ~/Brewfile_base
+brew bundle --file=~/Brewfile_base
+
