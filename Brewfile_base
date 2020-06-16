@@ -12,11 +12,10 @@ brew 'antigen'
 brew 'colordiff'
 brew 'git'
 brew 'jq'
-brew 'ssh-copy-id, link: true
+brew 'ssh-copy-id', link: true
 brew 'tcptraceroute'
 brew 'telnet'
 brew 'tmux'
-brew 'vim', args: ['--with-override-system-vi']
 brew 'watch'
 brew 'wget'
 
