@@ -1,4 +1,4 @@
-# Common
+# Use `brew bundle` to install the packages listed below
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/cask"
@@ -6,14 +6,30 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
 
-
-brew "git"
-brew "ssh-copy-id", link: true
-brew "tcptraceroute"
-brew "telnet"
-brew "antigen"
+# Packages
+brew 'ack'
+brew 'antigen'
+brew 'colordiff'
+brew 'git'
+brew 'jq'
+brew 'ssh-copy-id, link: true
+brew 'tcptraceroute'
+brew 'telnet'
+brew 'tmux'
+brew 'vim', args: ['--with-override-system-vi']
+brew 'watch'
+brew 'wget'
 
 # Applications
 brew "mas"
 cask "iterm2"
 mas "Bear", id: 1091189122
+
+# Fonts
+#tap 'caskroom/fonts'
+#cask 'font-fira-code'
+#cask 'font-m-plus'
+#cask 'font-hack'
+##cask 'font-iosevka'
+#cask 'font-ubuntu'
+#cask 'font-input'
