@@ -10,6 +10,7 @@ tap "homebrew/services"
 brew 'ack'
 brew 'antigen'
 brew 'colordiff'
+brew 'gcc'
 brew 'git'
 brew 'jq'
 brew 'ssh-copy-id', link: true
