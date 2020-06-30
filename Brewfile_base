@@ -27,7 +27,6 @@ mas "Bear", id: 1091189122
 
 # Fonts
 cask 'font-fira-code'
-cask 'font-m-plus'
-cask 'font-hack'
+cask 'font-sourcecodepro-nerd-font'
 #cask 'font-ubuntu'
 cask 'font-input'
