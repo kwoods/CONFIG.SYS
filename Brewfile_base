@@ -26,7 +26,6 @@ cask "iterm2"
 mas "Bear", id: 1091189122
 
 # Fonts
-tap 'caskroom/fonts'
 cask 'font-fira-code'
 #cask 'font-m-plus'
 #cask 'font-hack'
