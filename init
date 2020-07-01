@@ -22,3 +22,9 @@ brew update
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_base --output ~/Brewfile_base
 brew bundle -v --file=~/Brewfile_base
 
+# VSCode
+sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
+
+code --install-extension be5invis.vscode-custom-css
+code --install-extension Tyriar.sort-lines
+code --install-extension webrender.synthwave-x-fluoromachine
