@@ -21,9 +21,10 @@ brew 'watch'
 brew 'wget'
 
 # Applications
-brew "mas"
-cask "iterm2"
-mas "Bear", id: 1091189122
+brew 'mas'
+cask 'iterm2'
+cask 'visual-studio-code'
+mas 'Bear', id: 1091189122
 
 # Fonts
 cask 'font-fira-code'
