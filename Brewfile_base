@@ -5,11 +5,12 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
+tap "getantibody/tap"
 
 # Packages
 brew 'gcc'
 brew 'ack'
-brew 'antigen'
+brew 'getantibody/tap/antibody'
 brew 'colordiff'
 brew 'git'
 brew 'jq'
@@ -29,5 +30,7 @@ mas 'Bear', id: 1091189122
 # Fonts
 cask 'font-fira-code'
 cask 'font-source-code-pro'
-#cask 'font-ubuntu'
+cask 'font-consolas-for-powerline'
 cask 'font-input'
+cask 'font-roboto-mono'
+cask 'font-roboto-mono-for-powerline'
