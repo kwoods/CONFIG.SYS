@@ -9,6 +9,7 @@ tap "getantibody/tap"
 
 # Packages
 brew 'ack'
+brew 'awscli'
 brew 'colordiff'
 brew 'gcc'
 brew 'getantibody/tap/antibody'
