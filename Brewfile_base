@@ -8,15 +8,16 @@ tap "homebrew/services"
 tap "getantibody/tap"
 
 # Packages
-brew 'gcc'
 brew 'ack'
-brew 'getantibody/tap/antibody'
 brew 'colordiff'
+brew 'gcc'
+brew 'getantibody/tap/antibody'
 brew 'git'
 brew 'jq'
 brew 'ssh-copy-id', link: true
 brew 'tcptraceroute'
 brew 'telnet'
+brew 'terminal-notifier'
 brew 'tmux'
 brew 'watch'
 brew 'wget'
