@@ -29,7 +29,6 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 # Load antibody plugin manager
 source <(antibody init)
 # Plugins
-antibody bundle zsh-users/zsh-autosuggestions
 antibody bundle zsh-users/zsh-history-substring-search
 antibody bundle zsh-users/zsh-completions
 antibody bundle marzocchi/zsh-notify
