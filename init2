@@ -35,4 +35,4 @@ curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/setti
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_antibody_plugins --output ~/.zsh_antibody_plugins
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
 
-source ~/.zshrc
+echo Done.
