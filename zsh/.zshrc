@@ -11,6 +11,7 @@ zmodload -i zsh/complist
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
+
 # Options
 setopt auto_cd # cd by typing directory name if it's not a command
 setopt auto_list # automatically list choices on ambiguous completion
@@ -22,23 +23,24 @@ setopt inc_append_history # save history entries as soon as they are entered
 setopt share_history # share history between different instances
 setopt correct_all # autocorrect commands
 setopt interactive_comments # allow comments in interactive shells
+
 # Improve autocompletion style
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+
 # Load antibody plugin manager
 source <(antibody init)
+
 # Plugins
-antibody bundle zsh-users/zsh-history-substring-search
-antibody bundle zsh-users/zsh-completions
-antibody bundle marzocchi/zsh-notify
-antibody bundle buonomo/yarn-completion
-antibody bundle zdharma/fast-syntax-highlighting
+antibody bundle < ~/.zsh_antibody_plugins
+
 # Keybindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
+
 # Theme
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -56,17 +58,6 @@ SPACESHIP_PROMPT_ORDER=(
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
-# Simplify prompt if we're using Hyper
-if [[ "$TERM_PROGRAM" == "Hyper" ]]; then
-  SPACESHIP_PROMPT_SEPARATE_LINE=false
-  SPACESHIP_DIR_SHOW=false
-  SPACESHIP_GIT_BRANCH_SHOW=false
-fi
+
 antibody bundle denysdovhan/spaceship-prompt
-# Open new tabs in same directory
-if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
-  function chpwd {
-    printf 'e]7;%sa' "file://$HOSTNAME${PWD// /%20}"
-  }
-  chpwd
-fi
+
