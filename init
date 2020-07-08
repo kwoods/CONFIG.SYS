@@ -27,6 +27,8 @@ sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
 code --install-extension be5invis.vscode-custom-css
 code --install-extension Tyriar.sort-lines
 code --install-extension webrender.synthwave-x-fluoromachine
+
+export PLUGIN_VER=$(code --list-extensions --show-versions | grep synthwave-x-fluoromachine | cut -d @ -f 2)
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json --output ~/Library/ApplicationSupport/Code/User/settings.json
 
 # Zsh
