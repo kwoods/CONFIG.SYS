@@ -33,5 +33,5 @@ curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/setti
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_antibody_plugins --output ~/.zsh_antibody_plugins
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
 #TODO: make fluoromachine var for version
-cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.itermcolors ~/Library/Application Support/iTerm2/DynamicProfiles/
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/Application Support/iTerm2/DynamicProfiles/
+cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.itermcolors ~/Library/Application Support/iTerm2/DynamicProfiles/synthwave-x-fluoromachine.itermcolors
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/Application Support/iTerm2/DynamicProfiles/synthwave-profile.json
