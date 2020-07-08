@@ -30,9 +30,6 @@ cask 'visual-studio-code'
 mas 'Bear', id: 1091189122
 
 # Fonts
-cask 'font-fira-code'
-cask 'font-source-code-pro'
-cask 'font-consolas-for-powerline'
-cask 'font-input'
-#cask 'font-roboto-mono'
-#cask 'font-roboto-mono-for-powerline'
+#cask 'font-fira-code'
+#cask 'font-source-code-pro'
+cask 'font-saucecodepro-nerd-font'
