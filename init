@@ -24,11 +24,9 @@ brew bundle -v --file=~/Brewfile_base
 
 # VSCode
 sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
-
 code --install-extension be5invis.vscode-custom-css
 code --install-extension Tyriar.sort-lines
 code --install-extension webrender.synthwave-x-fluoromachine
-
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json --output ~/Library/ApplicationSupport/Code/User/settings.json
 
 # Zsh
@@ -36,4 +34,4 @@ curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_ant
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
 #TODO: make fluoromachine var for version
 cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.itermcolors ~/Library/Application Support/iTerm2/DynamicProfiles/
-
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/Application Support/iTerm2/DynamicProfiles/
