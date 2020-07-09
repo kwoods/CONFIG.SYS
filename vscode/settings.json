@@ -2,6 +2,15 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "workbench.colorTheme": "Synthwave x Fluoromachine",
+    "editor.fontSize": 14,
+    "editor.autoIndent": "advanced",
     "vscode_custom_css.imports": [
         "file:///Users/kwoods/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.css"
-    }
+        ],
+        "terminal.integrated.fontFamily": "Sauce Code Pro Light",
+        "terminal.integrated.fontSize": 16,
+        "editor.tabSize": 2,
+        "[json]": {
+            "editor.defaultFormatter": "HookyQR.beautify"
+        }
+}
