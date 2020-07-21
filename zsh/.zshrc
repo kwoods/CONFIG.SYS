@@ -64,3 +64,14 @@ SPACESHIP_CHAR_SUFFIX=" "
 
 antibody bundle denysdovhan/spaceship-prompt
 
+# aws_env_helper <profile>
+aws_env_helper () {
+    readonly profile=${1:?"The aws profile must be specified."}
+    export AWS_ACCESS_KEY_ID="$(aws configure get aws_access_key_id --profile $profile)"
+    export AWS_SECRET_ACCESS_KEY="$(aws configure get aws_secret_access_key --profile $profile)"
+    export AWS_SESSION_TOKEN="$(aws configure get aws_session_token --profile $profile)"
+    export AWS_PROFILE=$profile
+    export AWS_RETRY_MODE=adaptive
+    export AWS_MAX_ATTEMPTS=10
+}
+
