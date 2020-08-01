@@ -32,4 +32,4 @@ mas 'Bear', id: 1091189122
 # Fonts
 cask 'font-fira-code'
 #cask 'font-source-code-pro'
-cask 'font-saucecodepro-nerd-font'
+cask 'font-sauce-code-pro-nerd-font'
