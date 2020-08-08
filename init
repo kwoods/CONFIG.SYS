@@ -39,4 +39,5 @@ curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc -
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/ApplicationSupport/iTerm2/DynamicProfiles/synthwave-profile.json
 
 # setup python
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
 brew bundle -v --file=~/Brewfile_python
