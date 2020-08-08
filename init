@@ -41,3 +41,4 @@ curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthw
 # setup python
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
 brew bundle -v --file=~/Brewfile_python
+echo 'PATH=$(pyenv root)/shims:$PATH' >> ~/.zshrc
