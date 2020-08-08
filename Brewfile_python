@@ -1,0 +1,4 @@
+# Packages
+brew 'pyenv'
+brew 'openssl'
+brew 'readline'
