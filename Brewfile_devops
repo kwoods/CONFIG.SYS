@@ -1,0 +1,8 @@
+# Use `brew bundle` to install the packages listed below
+
+https://www.hashicorp.com/blog/announcing-hashicorp-homebrew-tap
+tap 'hashicorp/tap'
+
+brew 'hashicorp/tap/vault'
+brew 'hashicorp/tap/packer'
+brew 'tfenv'
