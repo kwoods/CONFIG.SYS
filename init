@@ -32,6 +32,7 @@ code --install-extension mikestead.dotenv
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension chenzhe.split-line
 code --install-extension jzarzoso.break-from-comma
+code --install-extension ms-python.python
 
 
 export PLUGIN_VER=$(code --list-extensions --show-versions | grep synthwave-x-fluoromachine | cut -d @ -f 2)
