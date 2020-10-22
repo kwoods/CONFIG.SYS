@@ -4,13 +4,33 @@
     "workbench.colorTheme": "Synthwave x Fluoromachine",
     "editor.fontSize": 14,
     "editor.autoIndent": "advanced",
+    "[markdown]": {
+        "editor.formatOnSave": false
+    },
     "vscode_custom_css.imports": [
         "file:///Users/kwoods/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.css"
-        ],
-        "terminal.integrated.fontFamily": "Fira Code",
-        "terminal.integrated.fontSize": 16,
-        "editor.tabSize": 2,
-        "[json]": {
-            "editor.defaultFormatter": "HookyQR.beautify"
-        }
+    ],
+    "terminal.integrated.fontFamily": "Fira Code",
+    "terminal.integrated.fontSize": 16,
+    "editor.tabSize": 2,
+    "[json]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "git.autofetch": true,
+    "[html]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "python.pythonPath": "/Users/kwoods/.pyenv/versions/3.8.0/bin/python",
+    "window.zoomLevel": 0,
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "cSpell.allowCompoundWords": true,
+    "cSpell.userWords": [
+        "astimezone",
+        "hgtv",
+        "ptfe",
+        "pytest",
+        "pytz",
+        "strptime"
+    ]
 }
