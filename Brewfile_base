@@ -5,7 +5,6 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
-#tap "getantibody/tap/antibody"
 
 # Packages
 brew 'ack'
@@ -13,7 +12,6 @@ brew 'awscli'
 brew 'colordiff'
 brew 'dog'
 brew 'gcc'
-#brew 'getantibody/tap/antibody'
 brew 'git'
 brew 'jq'
 brew 'ssh-copy-id', link: true
