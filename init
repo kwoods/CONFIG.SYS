@@ -41,14 +41,14 @@ code --install-extension ms-python.python
 
 
 export PLUGIN_VER=$(code --list-extensions --show-versions | grep synthwave-x-fluoromachine | cut -d @ -f 2)
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json --output ~/Library/ApplicationSupport/Code/User/settings.json
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json --output '~/Library/Application Support/Code/User/settings.json'
 
 # Zsh
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_antibody_plugins --output ~/.zsh_antibody_plugins
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
 #TODO: make fluoromachine var for version
-#cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.itermcolors ~/Library/ApplicationSupport/iTerm2/DynamicProfiles/synthwave-x-fluoromachine.itermcolors
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/ApplicationSupport/iTerm2/DynamicProfiles/synthwave-profile.json
+#cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-0.0.12/synthwave-x-fluoromachine.itermcolors '~/Library/Application Support/iTerm2/DynamicProfiles/synthwave-x-fluoromachine.itermcolors'
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output '~/Library/Application Support/iTerm2/DynamicProfiles/synthwave-profile.json'
 
 # setup python
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
