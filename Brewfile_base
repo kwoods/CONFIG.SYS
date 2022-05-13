@@ -9,6 +9,7 @@ tap "homebrew/services"
 # Packages
 brew 'ack'
 brew 'awscli'
+brew 'ccat'
 brew 'colordiff'
 brew 'dog'
 brew 'gcc'
