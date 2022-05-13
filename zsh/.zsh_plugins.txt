@@ -2,6 +2,8 @@ zpm-zsh/colors
 zdharma/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions
 marzocchi/zsh-notify
-robbyrussell/oh-my-zsh path:plugins/aws
+ohmyzsh/ohmyzsh                 path:plugins/aws
 zsh-users/zsh-history-substring-search
+
+# prompts:
 denysdovhan/spaceship-prompt
