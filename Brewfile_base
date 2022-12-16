@@ -5,10 +5,12 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
+tap "aws/tap"
 
 # Packages
 brew 'ack'
 brew 'awscli'
+brew 'aws-sam-cli'
 brew 'ccat'
 brew 'colordiff'
 brew 'dog'
