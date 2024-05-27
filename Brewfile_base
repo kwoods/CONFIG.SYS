@@ -15,6 +15,7 @@ brew 'ccat'
 brew 'colordiff'
 brew 'dog'
 brew 'gcc'
+brew 'gh'
 brew 'git'
 brew 'jq'
 brew 'ssh-copy-id', link: true
