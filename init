@@ -4,10 +4,10 @@
 # bash <(curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/init)
 
 # Die on failures
-set -e
+#set -e
 
 # Echo all commands
-set -x
+#set -x
 
 # Zsh
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt --output ~/.zsh_plugins.txt
