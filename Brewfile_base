@@ -9,6 +9,7 @@ tap "aws/tap"
 
 # Packages
 brew 'ack'
+brew 'antidote'
 brew 'awscli'
 brew 'aws-sam-cli'
 brew 'ccat'
