@@ -61,6 +61,7 @@ SPACESHIP_PROMPT_ORDER=(
   gcloud        # Google Cloud Platform section
   exec_time     # Execution time
   line_sep      # Line break
+  vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character
@@ -79,6 +80,12 @@ aws_env_helper () {
     export AWS_RETRY_MODE=adaptive
     export AWS_MAX_ATTEMPTS=10
 }
-PATH=$(pyenv root)/shims:$PATH
 
+# alias
+alias externalip="curl checkip.amazonaws.com"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
