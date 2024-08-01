@@ -10,10 +10,11 @@ set -e
 set -x
 
 # Check for Homebrew, install if we don’t have it
-if test ! $(which brew); then
-    echo “Installing homebrew…”
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+#if test ! $(which brew); then
+#    echo “Installing homebrew…”
+#    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#fi
+type brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 export PATH="/opt/homebrew/bin:$PATH" >> ~/.zshrc
 source ~/.zshrc
