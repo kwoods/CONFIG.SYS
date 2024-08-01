@@ -1,9 +1,22 @@
+#!/bin/zsh
+#
+# .zsh_plugins.txt - antidote plugins file
+
+# some plugins support deferred loading
+zsh-users/zsh-autosuggestions kind:defer
+
+rummik/zsh-tailf
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-history-substring-search
 zpm-zsh/colors
-zdharma/fast-syntax-highlighting
-zsh-users/zsh-autosuggestions
 marzocchi/zsh-notify
 ohmyzsh/ohmyzsh                 path:plugins/aws
-zsh-users/zsh-history-substring-search
+
+
 
 # prompts:
-denysdovhan/spaceship-prompt
+spaceship-prompt/spaceship-prompt
+
+# DO NOT EDIT BELOW THIS LINE
+
+belak/zsh-utils path:completion
