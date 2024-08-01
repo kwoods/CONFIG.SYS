@@ -9,12 +9,11 @@ set -e
 # Echo all commands
 set -x
 
-# Check for Homebrew, install if we don’t have it
-#if test ! $(which brew); then
-#    echo “Installing homebrew…”
-#    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#fi
+# Zsh
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt --output ~/.zsh_plugins.txt
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
 
+# Check for Homebrew, install if we don’t have it
 if ! command -v brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
@@ -47,9 +46,6 @@ code --install-extension ms-python.python
 export SYNTHWAVE_PLUGIN_VER=$(code --list-extensions --show-versions | grep synthwave-x-fluoromachine | cut -d @ -f 2)
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json --output ~/Library/Application\ Support/Code/User/settings.json
 
-# Zsh
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt --output ~/.zsh_plugins.txt
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
 #TODO: make fluoromachine var for version
 #cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-${SYNTHWAVE_PLUGIN_VER}/synthwave-x-fluoromachine.itermcolors ~/Library/Application\ Support/iTerm2/DynamicProfiles/synthwave-x-fluoromachine.itermcolors
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/Application\ Support/iTerm2/DynamicProfiles/synthwave-profile.json
