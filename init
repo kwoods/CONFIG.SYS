@@ -14,7 +14,11 @@ set -x
 #    echo “Installing homebrew…”
 #    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 #fi
-type brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if test ! type brew >/dev/null 2>&1; then
+    echo “Installing homebrew…”
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 export PATH="/opt/homebrew/bin:$PATH" >> ~/.zshrc
 source ~/.zshrc
