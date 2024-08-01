@@ -2,9 +2,7 @@
 #
 # .zsh_plugins.txt - antidote plugins file
 
-# some plugins support deferred loading
-zsh-users/zsh-autosuggestions kind:defer
-
+zsh-users/zsh-autosuggestions
 rummik/zsh-tailf
 zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-history-substring-search
