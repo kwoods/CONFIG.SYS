@@ -104,10 +104,15 @@ update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/m
 
 # Check if packages are already installed
 echo "⚙️  Configuring Homebrew..."
-# Check for Homebrew, install if we don’t have it
-if ! command -v brew; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_base --output ~/Brewfile_base
+
+if brew bundle check --file=~/Brewfile_base; then
+    echo "✅ All base packages already installed"
+else
+    echo "📦 Installing missing base packages..."
+    brew bundle --file=~/Brewfile_base
 fi
+rm -f ~/Brewfile_base
 
 # Fix PATH for Apple Silicon Macs
 if ! grep -q "/opt/homebrew/bin" ~/.zshrc 2>/dev/null; then
@@ -115,13 +120,6 @@ if ! grep -q "/opt/homebrew/bin" ~/.zshrc 2>/dev/null; then
     echo "✅ Added Homebrew to PATH"
 else
     echo "✅ Homebrew already in PATH"
-fi
-
-if brew bundle check --file=~/Brewfile_base; then
-    echo "✅ All base packages already installed"
-else
-    echo "📦 Installing missing base packages..."
-    brew bundle --file=~/Brewfile_base
 fi
 
 echo "⚙️  Configuring VSCode..."
@@ -158,15 +156,16 @@ update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/m
 
 # Dev Environment
 echo "⚙️  Configuring Dev Environment..."
-# Only install Python packages if not already done
-if ! step_completed "python_packages"; then
-    curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
-    brew bundle -v --file=~/Brewfile_python
-    mark_completed "python_packages"
-    # Clean up temp file
-    rm ~/Brewfile_python
+curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
+
+if brew bundle check --file=~/Brewfile_python; then
+    echo "✅ All Python packages already installed"
 else
-    echo "✅ Python packages already installed"
+    echo "📦 Installing missing Python packages..."
+    brew bundle -v --file=~/Brewfile_python
 fi
+
+# Clean up temp file
+rm -f ~/Brewfile_python
 
 
