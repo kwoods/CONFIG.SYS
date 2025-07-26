@@ -8,6 +8,13 @@ set -euo pipefail
 #set -e  # Die on failures
 #set -x  # Echo all commands
 
+# Parse command line arguments
+if [[ "${1:-}" == "--force" ]]; then
+    FORCE_UPDATE=true
+    rm -f "$STATE_FILE"  # Clear state to force reinstall
+    echo "🔄 Force mode enabled"
+fi
+
 ############################################
 # Helper functions
 ############################################
@@ -74,7 +81,8 @@ install_vscode_extension() {
 # Usage with force option support
 FORCE_UPDATE=${FORCE:-false}  # Can be set via environment variable
 
-STATE_FILE="$HOME/.config-sys-state"
+STATE_FILE="$HOME/.config-sys/state"
+mkdir -p "$(dirname "$STATE_FILE")"
 
 # Function to check if step was completed
 step_completed() {
@@ -94,6 +102,27 @@ echo "📝 Updating shell configuration..."
 update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc" ~/.zshrc
 update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
 
+# Check if packages are already installed
+echo "⚙️  Configuring Homebrew..."
+# Check for Homebrew, install if we don’t have it
+if ! command -v brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Fix PATH for Apple Silicon Macs
+if ! grep -q "/opt/homebrew/bin" ~/.zshrc 2>/dev/null; then
+    echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+    echo "✅ Added Homebrew to PATH"
+else
+    echo "✅ Homebrew already in PATH"
+fi
+
+if brew bundle check --file=~/Brewfile_base; then
+    echo "✅ All base packages already installed"
+else
+    echo "📦 Installing missing base packages..."
+    brew bundle --file=~/Brewfile_base
+fi
 
 echo "⚙️  Configuring VSCode..."
 sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
@@ -119,19 +148,6 @@ echo "📝 Updating iTerm2 profile..."
 mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
 update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json" ~/Library/Application\ Support/iTerm2/DynamicProfiles/synthwave-profile.json
 
-# Check if packages are already installed
-echo "⚙️  Configuring Homebrew..."
-# Check for Homebrew, install if we don’t have it
-if ! command -v brew; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-if brew bundle check --file=~/Brewfile_base; then
-    echo "✅ All base packages already installed"
-else
-    echo "📦 Installing missing base packages..."
-    brew bundle --file=~/Brewfile_base
-fi
 
 # Dev Environment
 echo "⚙️  Configuring Dev Environment..."
