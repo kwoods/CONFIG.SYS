@@ -8,6 +8,12 @@ set -euo pipefail
 #set -e  # Die on failures
 #set -x  # Echo all commands
 
+############################################
+# Helper functions
+############################################
+STATE_FILE="$HOME/.config-sys/state"
+mkdir -p "$(dirname "$STATE_FILE")"
+
 # Parse command line arguments
 if [[ "${1:-}" == "--force" ]]; then
     FORCE_UPDATE=true
@@ -15,9 +21,6 @@ if [[ "${1:-}" == "--force" ]]; then
     echo "🔄 Force mode enabled"
 fi
 
-############################################
-# Helper functions
-############################################
 update_config_with_backup() {
     local url=$1
     local destination=$2
@@ -80,9 +83,6 @@ install_vscode_extension() {
 
 # Usage with force option support
 FORCE_UPDATE=${FORCE:-false}  # Can be set via environment variable
-
-STATE_FILE="$HOME/.config-sys/state"
-mkdir -p "$(dirname "$STATE_FILE")"
 
 # Function to check if step was completed
 step_completed() {
