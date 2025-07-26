@@ -162,10 +162,4 @@ else
     echo "✅ Python packages already installed"
 fi
 
-# Only add pyenv to PATH if not already there
-if ! grep -q "pyenv root" ~/.zshrc 2>/dev/null; then
-    echo 'PATH=$(pyenv root)/shims:$PATH' >> ~/.zshrc
-    echo "✅ Added pyenv to PATH"
-else
-    echo "✅ pyenv already in PATH"
-fi
+
