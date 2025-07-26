@@ -125,7 +125,14 @@ else
 fi
 
 echo "⚙️  Configuring VSCode..."
-sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
+#sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
+
+# Check if VSCode is running and warn user
+if pgrep -x "Visual Studio Code" > /dev/null; then
+    echo "⚠️  Please close VSCode before continuing..."
+    read -p "Press Enter after closing VSCode..."
+fi
+
 install_vscode_extension "be5invis.vscode-custom-css"
 install_vscode_extension "Tyriar.sort-lines"
 install_vscode_extension "webrender.synthwave-x-fluoromachine"
