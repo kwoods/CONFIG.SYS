@@ -95,23 +95,6 @@ update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/m
 update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
 
 
-# Check for Homebrew, install if we don’t have it
-if ! command -v brew; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-#export PATH="/opt/homebrew/bin:$PATH" >> ~/.zshrc
-#source ~/.zshrc
-
-brew -v
-# for 10.x
-# sudo chown -R $USER /usr/local/Cellar
-
-brew update
-
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_base --output ~/Brewfile_base
-brew bundle -v --file=~/Brewfile_base
-
 echo "⚙️  Configuring VSCode..."
 sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
 install_vscode_extension "be5invis.vscode-custom-css"
@@ -138,6 +121,11 @@ update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/m
 
 # Check if packages are already installed
 echo "⚙️  Configuring Homebrew..."
+# Check for Homebrew, install if we don’t have it
+if ! command -v brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 if brew bundle check --file=~/Brewfile_base; then
     echo "✅ All base packages already installed"
 else
