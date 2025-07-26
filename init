@@ -1,17 +1,99 @@
 #!/bin/bash
+set -euo pipefail
 #
 # install.sh
 # bash <(curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/init)
 
-# Die on failures
-#set -e
+#set -u  # Exit if using undefined variables
+#set -e  # Die on failures
+#set -x  # Echo all commands
 
-# Echo all commands
-#set -x
+############################################
+# Helper functions
+############################################
+update_config_with_backup() {
+    local url=$1
+    local destination=$2
+    local force=${3:-false}  # Optional third parameter to force update
+    local temp_file=$(mktemp)
+    local backup_dir="$HOME/.config-backups/$(date +%Y%m%d-%H%M%S)"
+    local config_name=$(basename "$destination")
+    
+    # Download the new config to a temp file
+    echo "📡 Downloading latest $config_name..."
+    if ! curl -Ls "$url" --output "$temp_file"; then
+        echo "❌ Failed to download $config_name from $url"
+        rm -f "$temp_file"
+        return 1
+    fi
+    
+    # Check if destination file exists
+    if [[ -f "$destination" ]]; then
+        if [[ "$force" == "true" ]]; then
+            echo "🔄 Force mode: backing up and updating $config_name"
+            mkdir -p "$backup_dir"
+            cp "$destination" "$backup_dir/$config_name"
+            echo "💾 Backed up existing $config_name to $backup_dir/"
+        elif diff -q "$destination" "$temp_file" >/dev/null 2>&1; then
+            echo "✅ $config_name already up to date"
+            rm -f "$temp_file"
+            return 0
+        else
+            # Files differ - show diff and create backup
+            echo "📋 Changes detected in $config_name:"
+            echo "   Lines changed: $(diff "$destination" "$temp_file" | grep -c '^[<>]' || echo 0)"
+            
+            mkdir -p "$backup_dir"
+            cp "$destination" "$backup_dir/$config_name"
+            echo "💾 Backed up existing $config_name to $backup_dir/"
+            
+            # Optionally show the actual diff (uncomment if desired)
+            # echo "📝 Diff preview:"
+            # diff -u "$destination" "$temp_file" | head -20
+        fi
+    else
+        echo "📝 Creating new $config_name (no existing file found)"
+    fi
+    
+    # Move the new config into place
+    mv "$temp_file" "$destination"
+    echo "✅ Updated $config_name"
+}
 
-# Zsh
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt --output ~/.zsh_plugins.txt
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc --output ~/.zshrc
+# Function to install VSCode extension only if not present
+install_vscode_extension() {
+    local extension=$1
+    if code --list-extensions | grep -q "^$extension$"; then
+        echo "✅ $extension already installed"
+    else
+        echo "📦 Installing $extension..."
+        code --install-extension "$extension"
+    fi
+}
+
+# Usage with force option support
+FORCE_UPDATE=${FORCE:-false}  # Can be set via environment variable
+
+STATE_FILE="$HOME/.config-sys-state"
+
+# Function to check if step was completed
+step_completed() {
+    grep -q "^$1$" "$STATE_FILE" 2>/dev/null
+}
+
+# Function to mark step as completed
+mark_completed() {
+    echo "$1" >> "$STATE_FILE"
+}
+
+############################################
+# main section
+############################################
+# Zsh Envionment
+echo "📝 Updating shell configuration..."
+update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zshrc" ~/.zshrc
+update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
+
 
 # Check for Homebrew, install if we don’t have it
 if ! command -v brew; then
@@ -30,27 +112,56 @@ brew update
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_base --output ~/Brewfile_base
 brew bundle -v --file=~/Brewfile_base
 
-# VSCode
+echo "⚙️  Configuring VSCode..."
 sudo xattr -dr com.apple.quarantine /Applications/Visual\ Studio\ Code.app
-code --install-extension be5invis.vscode-custom-css
-code --install-extension Tyriar.sort-lines
-code --install-extension webrender.synthwave-x-fluoromachine
-code --install-extension streetsidesoftware.code-spell-checker
-code --install-extension mikestead.dotenv
-code --install-extension yzhang.markdown-all-in-one
-code --install-extension chenzhe.split-line
-code --install-extension jzarzoso.break-from-comma
-code --install-extension ms-python.python
-
+install_vscode_extension "be5invis.vscode-custom-css"
+install_vscode_extension "Tyriar.sort-lines"
+install_vscode_extension "webrender.synthwave-x-fluoromachine"
+install_vscode_extension "streetsidesoftware.code-spell-checker"
+install_vscode_extension "mikestead.dotenv"
+install_vscode_extension "yzhang.markdown-all-in-one"
+install_vscode_extension "chenzhe.split-line"
+install_vscode_extension "jzarzoso.break-from-comma"
+install_vscode_extension "ms-python.python"
 
 export SYNTHWAVE_PLUGIN_VER=$(code --list-extensions --show-versions | grep synthwave-x-fluoromachine | cut -d @ -f 2)
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json --output ~/Library/Application\ Support/Code/User/settings.json
+
+echo "📝 Updating VSCode settings..."
+mkdir -p ~/Library/Application\ Support/Code/User
+update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/vscode/settings.json" ~/Library/Application\ Support/Code/User/settings.json
 
 #TODO: make fluoromachine var for version
 #cp ~/.vscode/extensions/webrender.synthwave-x-fluoromachine-${SYNTHWAVE_PLUGIN_VER}/synthwave-x-fluoromachine.itermcolors ~/Library/Application\ Support/iTerm2/DynamicProfiles/synthwave-x-fluoromachine.itermcolors
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json --output ~/Library/Application\ Support/iTerm2/DynamicProfiles/synthwave-profile.json
+echo "📝 Updating iTerm2 profile..."
+mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
+update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/iterm/synthwave-profile.json" ~/Library/Application\ Support/iTerm2/DynamicProfiles/synthwave-profile.json
 
-# setup python
-curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
-brew bundle -v --file=~/Brewfile_python
-echo 'PATH=$(pyenv root)/shims:$PATH' >> ~/.zshrc
+# Check if packages are already installed
+echo "⚙️  Configuring Homebrew..."
+if brew bundle check --file=~/Brewfile_base; then
+    echo "✅ All base packages already installed"
+else
+    echo "📦 Installing missing base packages..."
+    brew bundle --file=~/Brewfile_base
+fi
+
+# Dev Environment
+echo "⚙️  Configuring Dev Environment..."
+# Only install Python packages if not already done
+if ! step_completed "python_packages"; then
+    curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_python --output ~/Brewfile_python
+    brew bundle -v --file=~/Brewfile_python
+    mark_completed "python_packages"
+    # Clean up temp file
+    rm ~/Brewfile_python
+else
+    echo "✅ Python packages already installed"
+fi
+
+# Only add pyenv to PATH if not already there
+if ! grep -q "pyenv root" ~/.zshrc 2>/dev/null; then
+    echo 'PATH=$(pyenv root)/shims:$PATH' >> ~/.zshrc
+    echo "✅ Added pyenv to PATH"
+else
+    echo "✅ pyenv already in PATH"
+fi
