@@ -1,3 +1,5 @@
 # Packages
 brew 'openssl'
 brew 'readline'
+brew 'uv'
+brew 'ruff'
