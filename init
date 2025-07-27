@@ -70,17 +70,6 @@ update_config_with_backup() {
     echo "✅ Updated $config_name"
 }
 
-# Function to install VSCode extension only if not present
-install_vscode_extension() {
-    local extension=$1
-    if code --list-extensions | grep -q "^$extension$"; then
-        echo "✅ $extension already installed"
-    else
-        echo "📦 Installing $extension..."
-        code --install-extension "$extension"
-    fi
-}
-
 # Usage with force option support
 FORCE_UPDATE=${FORCE:-false}  # Can be set via environment variable
 
@@ -160,15 +149,17 @@ if pgrep -x "Visual Studio Code" > /dev/null; then
     read -p "Press Enter after closing VSCode..."
 fi
 
-install_vscode_extension "be5invis.vscode-custom-css"
-install_vscode_extension "Tyriar.sort-lines"
-install_vscode_extension "webrender.synthwave-x-fluoromachine"
-install_vscode_extension "streetsidesoftware.code-spell-checker"
-install_vscode_extension "mikestead.dotenv"
-install_vscode_extension "yzhang.markdown-all-in-one"
-install_vscode_extension "chenzhe.split-line"
-install_vscode_extension "jzarzoso.break-from-comma"
-install_vscode_extension "ms-python.python"
+echo "📦 Installing VSCode extensions..."
+code --install-extension "be5invis.vscode-custom-css" --force
+code --install-extension "Tyriar.sort-lines" --force
+code --install-extension "webrender.synthwave-x-fluoromachine" --force
+code --install-extension "streetsidesoftware.code-spell-checker" --force
+code --install-extension "mikestead.dotenv" --force
+code --install-extension "yzhang.markdown-all-in-one" --force
+code --install-extension "chenzhe.split-line" --force
+code --install-extension "jzarzoso.break-from-comma" --force
+code --install-extension "ms-python.python" --force
+echo "✅ VSCode extensions installation complete"
 
 export SYNTHWAVE_PLUGIN_VER=$(code --list-extensions --show-versions | grep synthwave-x-fluoromachine | cut -d @ -f 2)
 
