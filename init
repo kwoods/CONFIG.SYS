@@ -104,6 +104,35 @@ update_config_with_backup "https://raw.githubusercontent.com/kwoods/CONFIG.SYS/m
 
 # Check if packages are already installed
 echo "⚙️  Configuring Homebrew..."
+echo "🍺 Checking for Homebrew..."
+
+if ! command -v brew &> /dev/null; then
+    echo "📦 Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    # Add Homebrew to PATH immediately for this session
+    if [[ -f "/opt/homebrew/bin/brew" ]]; then
+        # Apple Silicon Mac
+        echo "🔧 Adding Homebrew to PATH (Apple Silicon)"
+        export PATH="/opt/homebrew/bin:$PATH"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -f "/usr/local/bin/brew" ]]; then
+        # Intel Mac
+        echo "🔧 Adding Homebrew to PATH (Intel)"
+        export PATH="/usr/local/bin:$PATH"
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+    
+    echo "✅ Homebrew installed successfully"
+else
+    echo "✅ Homebrew already installed"
+fi
+
+# Verify brew is now available
+if ! command -v brew &> /dev/null; then
+    echo "❌ Error: Homebrew installation failed or PATH not set correctly"
+    exit 1
+fi
 curl -Ls https://raw.githubusercontent.com/kwoods/CONFIG.SYS/master/Brewfile_base --output ~/Brewfile_base
 
 if brew bundle check --file=~/Brewfile_base; then
