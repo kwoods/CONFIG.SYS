@@ -1,5 +1,4 @@
 # Use `brew bundle` to install the packages listed below
-tap "homebrew/bundle"
 tap "aws/tap"
 
 # Packages
